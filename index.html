@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lector de Códigos - Honeywell</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Lector de Códigos de Barra</h1>
+
+    <p class="info">
+      Conecta el scanner Honeywell por USB.  
+      Haz clic en el botón de abajo para activar la captura y luego escanea un código.
+    </p>
+
+    <button id="btnStart">🟢 Empezar a escuchar el scanner</button>
+    <button id="btnStop" disabled>🔴 Detener</button>
+
+    <div class="status">
+      Estado: <span id="statusText">Inactivo</span>
+    </div>
+
+    <h2>Último código leído</h2>
+    <div id="lastCode" class="last-code">—</div>
+
+    <h2>Historial de códigos escaneados</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Código</th>
+          <th>Fecha / Hora</th>
+        </tr>
+      </thead>
+      <tbody id="codesTableBody">
+        <!-- Se llena por JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
