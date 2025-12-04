@@ -62,9 +62,8 @@ label {
   margin-bottom: 4px;
 }
 
-input[type="text"],
 input[type="date"],
-input[type="file"] {
+select {
   padding: 6px 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
@@ -92,7 +91,6 @@ button:hover {
   color: #444;
 }
 
-/* Mensajes colores */
 .status-ok {
   color: #2e7d32;
 }
@@ -175,7 +173,6 @@ button:hover {
   color: #c62828;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   .filters {
     flex-direction: column;
