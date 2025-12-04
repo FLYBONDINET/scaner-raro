@@ -4,68 +4,61 @@
   <meta charset="UTF-8">
   <title>Control de Valijas por Vuelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="app-header">
-    <h1>Control de Valijas por Vuelo</h1>
+    <h1>Control de Valijas - Conectado a Hoja "data"</h1>
   </header>
 
   <main class="app-container">
-    <!-- Panel de carga de datos -->
+    <!-- Estado de conexión con la hoja -->
     <section class="panel">
-      <h2>1. Cargar archivo desde Excel (CSV)</h2>
-      <p class="hint">
-        Exportá tu Excel a CSV con columnas:<br>
-        <code>Fecha; Vuelo; BACTAG1; BACTAG2; BACTAG3; ...</code><br>
-        Ejemplo fecha: <strong>02/12/2025</strong> o <strong>2025-12-02</strong>.
-      </p>
-      <input type="file" id="fileInput" accept=".csv" />
-      <p id="fileStatus" class="status-message"></p>
+      <h2>1. Conexión con Google Sheets</h2>
+      <p id="sheetStatus" class="status-message"></p>
     </section>
 
-    <!-- Panel de selección de vuelo -->
+    <!-- Selección de fecha y vuelo -->
     <section class="panel">
-      <h2>2. Seleccionar vuelo</h2>
+      <h2>2. Seleccionar día y vuelo</h2>
       <div class="filters">
         <div class="field">
           <label for="flightDate">Fecha del vuelo</label>
           <input type="date" id="flightDate">
         </div>
+
         <div class="field">
-          <label for="flightNumber">Número de vuelo</label>
-          <input type="text" id="flightNumber" placeholder="Ej: FO5123">
+          <label for="flightSelect">Vuelos del día</label>
+          <select id="flightSelect">
+            <option value="">-- Seleccioná un vuelo --</option>
+          </select>
         </div>
+
         <button id="btnLoadFlight">Cargar vuelo</button>
       </div>
       <p id="flightInfo" class="status-message"></p>
     </section>
 
-    <!-- Panel de listado de valijas -->
+    <!-- Listado de valijas -->
     <section class="panel">
       <h2>3. Valijas del vuelo seleccionado</h2>
       <p class="hint">
-        Escaneá con el lector de código de barras. Cada lectura termina con Enter.
+        Escaneá con el lector de código de barras (USB). Cada lectura suele terminar con Enter.
       </p>
-      <div id="bagsContainer" class="bags-row">
-        <!-- Acá se pintan las valijas -->
-      </div>
+      <div id="bagsContainer" class="bags-row"></div>
       <div class="summary">
-        <span>Total: <strong id="totalBags">0</strong></span>
+        <span>Total en hoja: <strong id="totalBags">0</strong></span>
         <span>Escaneadas: <strong id="scannedBags">0</strong></span>
       </div>
     </section>
 
-    <!-- Panel de resultado de último escaneo -->
+    <!-- Resultado del último escaneo -->
     <section class="panel">
       <h2>4. Resultado del último código escaneado</h2>
       <div id="scanResult" class="scan-result"></div>
     </section>
   </main>
 
-  <!-- JS -->
   <script src="js/app.js"></script>
 </body>
 </html>
