@@ -1,7 +1,7 @@
 // js/app.js
 (() => {
-  // PONÉ ACÁ la URL de tu Apps Script publicado como Web App
-  const API_URL = 'https://script.google.com/macros/s/AKfycbyRP66JGx3kByh9eKs2YzGGy035nPZth0ZrQAW9bM52uJ_m7PcPSDTv1eQE4RVaP8ZB/exec';
+  // URL de tu Apps Script publicado como Web App
+  const API_URL = 'https://script.google.com/macros/s/AKfycbyrQxoZMy9bPgynb09Y1JNXPsFsotW7cIz8T1jOey8VUMkB97mYAjbgQnOVk66ylcQN7A/exec';
 
   // Estructura: [{ date:'YYYY-MM-DD', flight:'XXX123', loader:'', total: N, bags:[...] }]
   let flightsData = [];
@@ -36,21 +36,35 @@
       sheetStatus.className = "status-message";
 
       const res = await fetch(API_URL);
-      if (!res.ok) throw new Error("HTTP " + res.status);
+      console.log("Status fetch:", res.status, res.statusText);
 
-      const data = await res.json();
+      const text = await res.text();
+      console.log("Respuesta cruda del Apps Script:", text);
+
+      if (!res.ok) {
+        throw new Error("HTTP " + res.status + " " + res.statusText);
+      }
+
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        console.error("Error parseando JSON:", e);
+        throw new Error("La respuesta del Apps Script no es JSON válido (¿login de Google o error HTML?).");
+      }
+
       flightsData = Array.isArray(data) ? data : [];
 
       if (flightsData.length === 0) {
-        sheetStatus.textContent = "No se encontraron vuelos en la hoja 'data'. Verificá los datos.";
+        sheetStatus.textContent = "No se encontraron vuelos en la hoja 'data'. Verificá los datos (fecha en A, vuelo en B, bags desde F).";
         sheetStatus.className = "status-message status-warn";
       } else {
         sheetStatus.textContent = `Conectado. Vuelos cargados: ${flightsData.length}.`;
         sheetStatus.className = "status-message status-ok";
       }
     } catch (err) {
-      console.error(err);
-      sheetStatus.textContent = "Error al conectar con la hoja. Revisá la URL del Apps Script y permisos.";
+      console.error("Error en loadSheetData:", err);
+      sheetStatus.textContent = "Error al conectar con la hoja: " + err.message;
       sheetStatus.className = "status-message status-error";
     }
   }
