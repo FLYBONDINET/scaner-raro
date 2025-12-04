@@ -196,7 +196,8 @@
       return;
     }
 
-    const normalized = code.trim();
+   // Normalizar: quitar ceros a la izquierda
+let normalized = code.trim().replace(/^0+/, "");
 
     // 1) ¿Está en el vuelo actual?
     const el = currentBagElements.get(normalized);
