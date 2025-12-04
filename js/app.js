@@ -1,7 +1,7 @@
 // js/app.js
 (() => {
   // PONÉ ACÁ la URL de tu Apps Script publicado como Web App
-  const API_URL = 'TU_URL_DE_APPS_SCRIPT_AQUI';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbyRP66JGx3kByh9eKs2YzGGy035nPZth0ZrQAW9bM52uJ_m7PcPSDTv1eQE4RVaP8ZB/exec';
 
   // Estructura: [{ date:'YYYY-MM-DD', flight:'XXX123', loader:'', total: N, bags:[...] }]
   let flightsData = [];
